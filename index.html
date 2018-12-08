@@ -1,0 +1,416 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Functions</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/extensions.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+        <!-- vertical slides are seperated with two "-", horizontal slides seperated with four "-" --->
+				<section data-markdown data-separator="^\n----\n$" data-separator-vertical="^\n--\n$">
+          <script type="text/template">
+            # Functions
+            by Sergey Guchok
+            
+            --
+
+            ## First computers
+            ![Sample image](img/first-computer.png)
+
+            --
+
+            ## Machine code
+            ![Sample image](img/machine-code.png) <!-- .element: class="machine-code" -->
+
+            --
+
+            ## Assembler
+            - first low-level programming language <!-- .element: class="fragment" data-fragment-index="1" -->
+            - created in 1949 <!-- .element: class="fragment" data-fragment-index="2" -->
+            
+            ![Sample image](img/assembler.png) <!-- .element: class="fragment assembler" data-fragment-index="3" -->
+            <!-- .assembler: data-width="300" -->
+            
+            --
+
+            ## John McCarthy
+            ![Sample image](img/mccarthy.jpg) <!-- .element: class="mccarthy" -->
+
+            - created first programming language to use function <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            ![Sample image](img/lisp.png) <!-- .element: class="fragment lisp" data-fragment-index="1" -->
+
+          </script>
+        </section>
+
+        <section data-markdown data-separator="^\n----\n$" data-separator-vertical="^\n--\n$">
+          <script type="text/template">
+            ## What is the function ?
+
+            Function – a program code fragment that can be accessed from another place in the program. <!-- .element: class="fragment" data-fragment-index="1" -->
+          </script>
+        </section>
+
+        <section data-markdown data-separator="^\n----\n$" data-separator-vertical="^\n--\n$">
+          <script type="text/template">
+            ## Functions in JS
+            
+            --
+
+            ### Functions are first-class objects
+            - have properties and methods just like any other object <!-- .element: class="fragment" data-fragment-index="1" -->
+            - a 'Function' object <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            --
+
+            Function consists of : 
+            - keyword 'function' <!-- .element: class="fragment" data-fragment-index="1" -->
+            - function name <!-- .element: class="fragment" data-fragment-index="2" -->
+            - list of parameters that it takes <!-- .element: class="fragment" data-fragment-index="3" -->
+            - function body <!-- .element: class="fragment" data-fragment-index="4" -->
+            - return statement <!-- .element: class="fragment" data-fragment-index="5" -->
+          </script>
+        </section>
+
+        <section data-markdown data-separator="^\n----\n$" data-separator-vertical="^\n--\n$">
+          <script type="text/template">
+            ## Function definition
+            
+            --
+
+            ### Function declaration
+
+            ```javascript
+            function functionName([param[, param[, ... param]]]) {
+              statements
+            }
+            ``` 
+
+            --
+
+            Main feature - availability 
+            ```javascript
+            foo();
+              
+            function foo() {
+              console.log('foo');
+            }
+            // foo
+            ``` 
+
+            --
+
+            ### Function expression
+
+            ```javascript
+            var myFunction = function() {
+                statements
+            }
+
+            myFunction()
+            ```
+            ```javascript 
+            myFunction() 
+
+            var myFunction = function() {
+              console.log(‘Worked!’);
+            } // TypeError: myFunction is not a function
+            ``` 
+            [hoisting](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting) <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            --
+
+            Benefits
+            - can be used as [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) <!-- .element: class="fragment" data-fragment-index="1" -->
+            - anonymous functions <!-- .element: class="fragment" data-fragment-index="2" -->
+            - can be passed as argument to other function <!-- .element: class="fragment" data-fragment-index="3" -->
+            - IIFE <!-- .element: class="fragment" data-fragment-index="4" -->
+
+            --
+
+            #### Named function expression
+
+            ```javascript
+            var myFunction = function namedFunction(){
+                statements
+            }
+            ```
+
+            stack trace will contain the name of the function <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            --
+
+            #### IIFE
+            
+            IIFE stands for Immediately Invokable Function Expression
+
+             ```javascript
+            (function() {
+                statements
+            })();
+            ```
+
+            --
+
+            #### Arrow function expression
+
+            ```javascript
+            ([param[, param]]) => {
+               statements
+            }
+            ``` 
+            or
+            ```javascript
+            param => expression
+            ```           
+
+            --
+
+            ### Function constructor 
+
+            ```javascript
+            new Function (arg1, arg2, ... argN, functionBody)
+            ```
+
+            - arg1, arg2, ... argN - names for the function to be used as parameters <!-- .element: class="fragment" data-fragment-index="1" -->
+            - functionBody - string containing JS statement <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            --
+
+            ### Function as an object`s method
+
+            Method - object`s property containing a function definition <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            --
+
+            #### Example: 
+
+            ```javascript
+            var obj = {
+              myFunction: function() {
+                console.log(‘It’s a function!’);
+              }
+            };
+            obj.myFunction() // It`s a function!
+            ```
+
+            starting with ECMAScript 2015:
+            ```javascript
+            var obj = {
+              foo() {},
+              bar() {}
+            };
+            ```
+
+          </script>
+        </section>
+        
+        <section data-markdown data-separator="^\n----\n$" data-separator-vertical="^\n--\n$">
+          <script type="text/template">
+            ## Function parameters 
+
+            --
+
+            You specify how much parameters function can take 
+
+            ```javascript
+            function myFunction(name, age, date) {
+                statements
+            }
+            ```
+
+            ```javascript
+            var randomVariable = 25;
+            var name = ‘Alex’;
+            var date = ‘never’;
+
+            function myFunction(name, age, date){
+                console.log(name, age, date) // Alex 25 never
+            }
+
+            myFunction(name, randomVariable, date);
+            ```
+
+            --
+
+            Extra parameters will be ignored:
+
+            ```javascript
+            var randomVariable = 25;
+            var name = ‘Alex’;
+            var date = ‘never’;
+            var birthday = ‘2 of February’;
+
+            function myFunction(name, age, date){
+                console.log(name, age, date) // Alex 25 never
+                console.log(birthday) // birthday is not defined
+            }
+
+            myFunction(name, randomVariable, date, birthday);
+            ```
+
+            --
+
+            If function is being called with less parameters than expected, rest will be set to undefined:
+
+            ```javascript
+            var randomVariable = 25;
+            var name = ‘Alex’;
+
+            function myFunction(name, age, date){
+                console.log(name, age, date) // Alex 25 undefined    
+            }
+
+            myFunction(name, randomVariable);
+            ```
+
+            --
+
+            'arguments' object
+
+            ```javascript
+            var randomVariable = 25;
+            var name = ‘Alex’;
+
+            function myFunction(){
+                console.log(...arguments) // Alex 25
+            }
+
+            myFunction(name, randomVariable);
+            ```
+
+            To access variable, you can use Array`s syntax: 
+
+            ```javascript
+            function myFunction(){
+              console.log(arguments[0]) // Alex
+            }
+
+            myFunction(name, randomVariable);
+            ```            
+          </script>
+        </section>
+
+        <section data-markdown data-separator="^\n----\n$" data-separator-vertical="^\n--\n$">
+          <script type="text/template">
+            ## Returning value
+            
+            Function always return a value. In JS, if no return value specified, the function will return ‘undefined’ by default. <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            --
+
+            To return some value from function you should use a special ‘return’ statement.
+
+            ```javascript
+            function sum(a,b) {
+                return a+b;
+            }
+
+            console.log(sum(5,3)) // 8
+            ```
+
+            --
+
+            empty ‘return’ statement can be used to stop execution and exit function: 
+
+            ```javascript
+            function showName(name) {
+                if(!name) {
+                    return;
+                }
+                console.log(name)
+            }
+            showName(); // undefined
+            showName(‘Alex’); // Alex
+            ```
+          </script>
+        </section>
+
+        <section data-markdown data-separator="^\n----\n$" data-separator-vertical="^\n--\n$">
+          <script type="text/template">
+            ## High-order functions
+
+            A high-order function is a function that can take another function as an argument or return another function as a result. <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            --
+
+            ### Callback-function
+
+            Callback-function is a function that should be executed after previous function complete execution
+
+            ```javascript
+            function doHomework(subject, callback) {
+              console.log(`Starting my ${subject} homework.`);
+              callback();
+            }
+            function alertFinished(){
+              console.log('Finished my homework');
+            }
+            doHomework('math', alertFinished);
+            ```            
+
+            --
+
+            Example of the problem:
+
+            ```javascript 
+            function first(){
+              setTimeout(function(){
+                console.log(1);
+              }, 500 );
+            }
+            function second(){
+              console.log(2);
+            }
+            first();
+            second();
+            // 2
+            // 1
+            ```
+          </script>
+        </section>
+
+        <section>
+          <h2>Thank you for watching!</h2>
+        </section>
+        
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
