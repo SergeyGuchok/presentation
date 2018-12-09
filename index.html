@@ -185,6 +185,16 @@
 
             --
 
+            #### What you should know about Arrow function
+            
+            - no own 'this' <!-- .element: class="fragment" data-fragment-index="1" -->
+            - no own 'arguments' <!-- .element: class="fragment" data-fragment-index="2" -->
+            - cannot be used as a constructor <!-- .element: class="fragment" data-fragment-index="3" -->
+            
+            [Arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) <!-- .element: class="fragment" data-fragment-index="4" --> 
+
+            --
+
             ### Function constructor 
 
             ```javascript
@@ -210,7 +220,7 @@
                 console.log(‘It’s a function!’);
               }
             };
-            obj.myFunction() // It`s a function!
+            obj.myFunction(); // It`s a function!
             ```
 
             starting with ECMAScript 2015:
@@ -370,7 +380,7 @@
 
             --
 
-            Example of the problem:
+            Example
 
             ```javascript 
             function first(){
@@ -386,6 +396,7 @@
             // 2
             // 1
             ```
+            [Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop) <!-- .element: class="fragment" data-fragment-index="1" -->
           </script>
         </section>
 
